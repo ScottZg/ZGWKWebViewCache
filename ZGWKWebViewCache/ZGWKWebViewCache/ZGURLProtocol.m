@@ -23,14 +23,12 @@ static NSString * const ZGURLProtocolKey = @"zgPKey";
  */
 @property (nonatomic,strong)NSURLSessionDataTask *task;
 
-@property (nonatomic,strong)NSString *responseMIMEType;
 @end
 
 @implementation ZGURLProtocol
 
 + (BOOL)canInitWithRequest:(NSURLRequest *)request {
     NSString *scheme = [[request URL] scheme];
-    NSLog(@"1111%@",request.URL.absoluteString);
     if ([scheme caseInsensitiveCompare:@"http"] == NSOrderedSame || [scheme caseInsensitiveCompare:@"https"] == NSOrderedSame) {  //只缓存http和https的请求
         NSString *str = request.URL.path;
         if ([self cacheTypeWithStr:str] && ![NSURLProtocol propertyForKey:ZGURLProtocolKey inRequest:request]) {
